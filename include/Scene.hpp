@@ -1,9 +1,11 @@
 /*
 ** EPITECH PROJECT, 2022
-** JAM 3
+** Jam2
 ** File description:
-** scene.hpp
+** Scene.hpp
 */
+
+#pragma once
 
 #ifndef SCENE_HPP_
 #define SCENE_HPP_
@@ -15,8 +17,6 @@
 
 #include "Object.hpp"
 
-using namespace std;
-
 class Scene
 {
     public:
@@ -25,6 +25,9 @@ class Scene
     public:
         ~Scene();
         Scene();
+        void startLevel(std::string configFile);
+        void loop();
+        int endLevel();
 };
 
 #endif /* SCENE_HPP_ */

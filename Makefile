@@ -17,7 +17,7 @@ FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -O3 -lpthread
 
 INCLUDE =   -I./include
 
-SFMLINCLUDE	=	-lsfml-graphics -lsfml-window -lsfml-system
+SFMLINCLUDE	= -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 
 CFLAGS = -g
 
@@ -25,7 +25,6 @@ all: $(NAME) $(PLUGIN_SOS)
 
 $(NAME): $(OBJ)
 	g++ $(INCLUDE) -o $@ $^ $(FLAGS) $(SFMLINCLUDE)
-	./$(NAME)
 
 %.o: %.cpp
 	g++ $(INCLUDE)  -c $< -o $@ $(FLAGS) $(SFMLINCLUDE)
@@ -41,7 +40,7 @@ re: fclean
 	# NO_PARALLEL=1
 
 exe:
-	re
+	make re
 	./$(NAME)
 
 v:

@@ -5,15 +5,17 @@
 ** main.cpp
 */
 
-#include "../include/Object.hpp"
-#include "../include/SFML.hpp"
+#include "Object.hpp"
+#include "SFML.hpp"
+#include "Parsing.hpp"
 
 using namespace std;
 
 int main()
 {
     SFML sfml;
-    cout << "TEST" << endl;
+    Parsing parser;
+
     sfml.loop();
     return 0;
 }
