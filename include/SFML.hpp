@@ -54,7 +54,6 @@ class SFML
         void display(std::vector<sf::RectangleShape> rects, std::vector<sf::Sprite> sprites);
         void events();
 
-        //! Sounds
         void playSoundFromFile(string filepath);
         std::map<std::string, std::shared_ptr<Sounds>> getSounds() {return _sounds;};
         void playSound(string name);
