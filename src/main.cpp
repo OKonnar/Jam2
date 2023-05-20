@@ -25,12 +25,12 @@ int main()
     sfml.loadSounds();
     sounds = sfml.getSounds();
 
+    //! TESTS FOR AUDIO
+
     // for (auto& sound : sounds) {
     //     cout << "playing: " << sound.first << endl;
     //     sfml.playSound(sound.first);
     // }
-
-
 
     for (auto &line : lines) {
         cout << line << endl;

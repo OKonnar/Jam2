@@ -8,8 +8,11 @@
 #pragma once
 
 #include <filesystem>
+#include <dirent.h>
 #include <memory>
 #include <map>
+#include <cstring>
+#include <iostream>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>

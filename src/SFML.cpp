@@ -108,28 +108,42 @@ void SFML::playSoundFromFile(string filepath)
 }
 
 void SFML::loadSounds() {
-    const string path = "assets/sounds/";
+    // const string path = "assets/sounds/";
+    // for (const auto & entry : filesystem::directory_iterator(path)) {
+    //     if (entry.path().extension() == ".wav") {
+    //         auto sound = make_shared<Sounds>();
+    //         if (!sound->buffer.loadFromFile(entry.path())) {
+    //             continue;
+    //         }
+    //         sound->sound.setBuffer(sound->buffer);
+    //         string filename = entry.path().stem().string();
+    //         _sounds[filename] = sound;
+    //     }
+    // }
 
-    for (const auto & entry : filesystem::directory_iterator(path)) {
-        if (entry.path().extension() == ".wav") {
+    const char *path = "assets/sounds/";
+    DIR *dir = opendir(path);
+    if (dir == nullptr) {
+        cerr << "Failed to open directory\n";
+        return;
+    }
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != nullptr) {
+        if (strstr(entry->d_name, ".wav") != nullptr) {
             auto sound = make_shared<Sounds>();
-
-            // Load the sound buffer from the file
-            if (!sound->buffer.loadFromFile(entry.path())) {
-                // Handle the error if needed
+            string filepath = string(path) + entry->d_name;
+            if (!sound->buffer.loadFromFile(filepath)) {
+                cerr << "Failed to load sound file: " << filepath << "\n";
                 continue;
             }
-
-            // Attach the sound buffer to the sound instance
             sound->sound.setBuffer(sound->buffer);
-
-            // Get the filename without the extension
-            string filename = entry.path().stem().string();
-
-            // Add the filename and the sound to the map of sounds
+            string filename = entry->d_name;
+            filename = filename.substr(0, filename.size()-4);
+            cout << filename << endl;
             _sounds[filename] = sound;
         }
     }
+    closedir(dir);
 }
 
 void SFML::playSound(string name)
