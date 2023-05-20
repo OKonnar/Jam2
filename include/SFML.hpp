@@ -68,4 +68,7 @@ class SFML
         //! MUSICS
         void loadMusic(const std::string& filename);
         void playMusic(const std::string& name);
+
+        //! CLOCK
+        sf::Clock getClock(void);
 };

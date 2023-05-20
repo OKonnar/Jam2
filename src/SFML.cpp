@@ -86,7 +86,7 @@ void SFML::updateSprite(sf::RectangleShape rect, sf::Vector2f newPos)
 
 void SFML::clear()
 {
-    _window.clear(sf::Color::White);
+    _window.clear(sf::Color(255, 255, 255, 127));
 }
 
 void SFML::display()
@@ -108,20 +108,8 @@ void SFML::playSoundFromFile(string filepath)
     }
 }
 
-void SFML::loadSounds() {
-    // const string path = "assets/sounds/";
-    // for (const auto & entry : filesystem::directory_iterator(path)) {
-    //     if (entry.path().extension() == ".wav") {
-    //         auto sound = make_shared<Sounds>();
-    //         if (!sound->buffer.loadFromFile(entry.path())) {
-    //             continue;
-    //         }
-    //         sound->sound.setBuffer(sound->buffer);
-    //         string filename = entry.path().stem().string();
-    //         _sounds[filename] = sound;
-    //     }
-    // }
-
+void SFML::loadSounds()
+{
     const char *path = "assets/sounds/";
     DIR *dir = opendir(path);
     if (dir == nullptr) {
@@ -139,7 +127,7 @@ void SFML::loadSounds() {
             }
             sound->sound.setBuffer(sound->buffer);
             string filename = entry->d_name;
-            filename = filename.substr(0, filename.size()-4);
+            filename = filename.substr(0, filename.size() - 4);
             _sounds[filename] = sound;
         }
     }
@@ -168,7 +156,8 @@ void SFML::loadMusic(const string& filename)
     if (!music->openFromFile(path + filename)) {
         throw runtime_error("Failed to load music file: " + filename);
     }
-    _musics[filename] = music;
+    string name = filename.substr(0, filename.size() - 4);
+    _musics[name] = music;
 }
 
 void SFML::playMusic(const std::string& name)
@@ -180,4 +169,9 @@ void SFML::playMusic(const std::string& name)
     else {
         throw std::runtime_error("Music not found: " + name);
     }
+}
+
+sf::Clock SFML::getClock(void)
+{
+    return _clock;
 }

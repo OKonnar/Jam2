@@ -19,7 +19,8 @@
 #include "SFML.hpp"
 #include "Parsing.hpp"
 
-#define TILESIZE 400
+#define TILESIZEX 50
+#define TILESIZEY 100
 
 using namespace std;
 
@@ -32,6 +33,8 @@ class Scene
         shared_ptr<SFML> _sfml;
         vector<sf::Sprite> _sprites;
         vector<sf::RectangleShape> _rectangles;
+        Parsing _parsing;
+        std::vector<double> _lanesX;
 
     public:
         ~Scene();

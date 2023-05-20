@@ -10,19 +10,24 @@
 #include "Object.hpp"
 #include "SFML.hpp"
 #include "Parsing.hpp"
+#include "Scene.hpp"
 
 using namespace std;
 
 int main()
 {
-    SFML sfml;
+    std::shared_ptr<SFML> sfml = std::make_shared<SFML>();
     Parsing parser;
 
     parser.parseFile("assets/exampleconfig");
     std::vector<std::string> lines = parser.getLines();
 
     std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
-    sounds = sfml.getSounds();
+    sounds = sfml->getSounds();
+
+    Scene scene;
+    scene.startLevel("assets/exampleconfig", sfml);
+    scene.loop();
 
     //! TESTS FOR AUDIO
 
@@ -38,10 +43,10 @@ int main()
     //     } else sfml.playSound("si");
     // }
 
-    sfml.loadMusic("eterna-cancao-wav-12569.wav");
-    sfml.playMusic("eterna-cancao-wav-12569.wav");
+    // sfml.loadMusic("eterna-cancao-wav-12569.wav");
+    // sfml.playMusic("eterna-cancao-wav-12569.wav");
 
-    sfml.loop();
+    //sfml.loop();
 
     return 0;
 }
