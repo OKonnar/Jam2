@@ -13,7 +13,7 @@ SRC     =   $(shell find ./src -name "*.cpp")
 
 OBJ     =   $(SRC:.cpp=.o)
 
-FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -O3 -lpthread
+FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -O3 -lpthread -lstdc++fs
 
 INCLUDE =   -I./include
 
@@ -37,14 +37,13 @@ fclean: clean
 
 re: fclean
 	@$(MAKE) all
-	# NO_PARALLEL=1
 
 exe:
-	make re
-	./$(NAME)
+	@make re
+	@./$(NAME)
+	@make fclean
 
 v:
 	valgrind --track-origins=yes --leak-check=full -s ./$(NAME)
 
 .PHONY:  all clean fclean re exe
-

@@ -16,11 +16,14 @@
 #include <vector>
 
 #include "Object.hpp"
+#include "SFML.hpp"
+#include "Parser.hpp"
 
 class Scene
 {
     public:
         vector<shared_ptr<Object>> _objects;
+        sf::Music _levelMusic;
 
     public:
         ~Scene();

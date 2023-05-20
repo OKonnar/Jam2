@@ -12,7 +12,9 @@ Scene::~Scene() {}
 
 void Scene::startLevel(std::string configFile)
 {
-
+    Parser parser;
+    parser.parseFile(configFile);
+    
 }
 
 void Scene::loop(void)

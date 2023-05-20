@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <filesystem>
+#include <memory>
+#include <map>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -16,6 +20,12 @@ using namespace std;
 
 class SFML
 {
+    public :
+        struct Sounds {
+            sf::SoundBuffer buffer;
+            sf::Sound sound;
+        };
+
     private:
         struct Vector2u {
             unsigned int x, y;
@@ -25,6 +35,7 @@ class SFML
         sf::Event           _event;
         sf::RenderWindow    _window;
         sf::Clock           _clock;
+        std::map<std::string, std::shared_ptr<Sounds>> _sounds;
 
     public:
         SFML(void);
@@ -42,5 +53,10 @@ class SFML
 
         void display(std::vector<sf::RectangleShape> rects, std::vector<sf::Sprite> sprites);
         void events();
-        void playSound(string filepath);
+
+        //! Sounds
+        void playSoundFromFile(string filepath);
+        std::map<std::string, std::shared_ptr<Sounds>> getSounds() {return _sounds;};
+        void playSound(string name);
+        void loadSounds();
 };
