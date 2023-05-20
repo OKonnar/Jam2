@@ -36,10 +36,10 @@ void Parsing::parseFile(const std::string& fileConfig) {
     inputFile.close();
 }
 
-std::vector<int> Parsing::getLine(int index)
+std::vector<int> Parsing::getLine(unsigned int index)
 {
     std::vector<int> result;
-    if (index >= 0 && index < _lines.size()) {
+    if (index < _lines.size()) {
         std::istringstream iss(_lines[index]);
         int value;
         while (iss >> value) {

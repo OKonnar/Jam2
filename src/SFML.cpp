@@ -9,16 +9,23 @@
 
 using namespace std;
 
-SFML::SFML(void)    {_window.create(sf::VideoMode {1280, 720, 32}, "Jam");}
-SFML::~SFML(void)   {}
+SFML::SFML(void)
+{
+    _windowSize.x = 1920;
+    _windowSize.y = 1080;
+    _window.create(sf::VideoMode(_windowSize.x, _windowSize.y, 32), "Jam");
+}
+
+SFML::~SFML(void)
+{}
 
 void SFML::loop(void)
 {
-    create();
+    // create();
     while (_window.isOpen()) {
         events();
-        update();
-        display();
+        // update();
+        // display();
     }
 }
 
@@ -30,20 +37,74 @@ void SFML::events(void)
     }
 }
 
-void SFML::create(void)
+sf::Sprite SFML::create(string filename, sf::Vector2f size, sf::Vector2f position)
 {
-    // creation des sprites
+    sf::Sprite sprite;
+    sf::Texture texture;
+
+    texture.loadFromFile(filename);
+    sprite.setTexture(texture, true);
+    sprite.setScale(size);
+    sprite.setPosition(position);
+
+    return sprite;
 }
 
-void SFML::update(void)
+sf::RectangleShape SFML::create(sf::Vector2f size, sf::Vector2f position, sf::Color color)
 {
-     // update des sprites
+    sf::RectangleShape rect;
+
+    rect.setSize(size);
+    rect.setPosition(position);
+    rect.setFillColor(color);
+
+    return rect;
 }
 
-void SFML::display(void)
+void SFML::updateSprite(sf::Sprite sprite)
 {
-    // display des sprites
+    _window.draw(sprite);
+}
+
+void SFML::updateSprite(sf::Sprite sprite, sf::Vector2f newPos)
+{
+    sprite.setPosition(newPos);
+    _window.draw(sprite);
+}
+
+void SFML::updateSprite(sf::RectangleShape rect)
+{
+    _window.draw(rect);
+}
+
+void SFML::updateSprite(sf::RectangleShape rect, sf::Vector2f newPos)
+{
+    rect.setPosition(newPos);
+    _window.draw(rect);
+}
+
+void SFML::display(vector<sf::RectangleShape> rects, vector<sf::Sprite> sprites)
+{
+    _window.clear(sf::Color::White);
+    for (vector<sf::RectangleShape>::iterator it = rects.begin(); it != rects.end(); it++)
+        updateSprite(*it);
+    for (vector<sf::Sprite>::iterator it = sprites.begin(); it != sprites.end(); it++)
+        updateSprite(*it);
     _window.display();
+}
+
+void SFML::playSound(string filepath)
+{
+    sf::SoundBuffer buffer;
+    if (!buffer.loadFromFile(filepath)) {
+        throw runtime_error("wrong file path");
+    }
+    sf::Sound sound;
+    sound.setBuffer(buffer);
+    sound.play();
+    while (sound.getStatus() == sf::Sound::Playing) {
+        sf::sleep(sf::seconds(0.1f));
+    }
 }
 
 void SFML::playSoundFromFile(string filepath)
