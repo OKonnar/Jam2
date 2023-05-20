@@ -20,7 +20,8 @@ class Parsing {
         int getBPM() {return _BPM;};
         int getLength() {return _length;};
         std::string getFileName() {return _fileName;};
-        std::vector<int> getLine(int index);
+        std::vector<int> getLine(unsigned int index);
+
         std::vector<std::string> getLines() {return _lines;};
 
     private:

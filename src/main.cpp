@@ -5,8 +5,8 @@
 ** main.cpp
 */
 
-#include <map>
 
+#include <map>
 #include "Object.hpp"
 #include "SFML.hpp"
 #include "Parsing.hpp"

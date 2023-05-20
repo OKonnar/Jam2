@@ -1,9 +1,11 @@
 /*
 ** EPITECH PROJECT, 2022
-** JAM 3
+** Jam2
 ** File description:
-** scene.hpp
+** Scene.hpp
 */
+
+#pragma once
 
 #ifndef SCENE_HPP_
 #define SCENE_HPP_
@@ -14,17 +16,21 @@
 #include <vector>
 
 #include "Object.hpp"
-
-using namespace std;
+#include "SFML.hpp"
+#include "Parser.hpp"
 
 class Scene
 {
     public:
         vector<shared_ptr<Object>> _objects;
+        sf::Music _levelMusic;
 
     public:
         ~Scene();
         Scene();
+        void startLevel(std::string configFile);
+        void loop();
+        int endLevel();
 };
 
 #endif /* SCENE_HPP_ */
