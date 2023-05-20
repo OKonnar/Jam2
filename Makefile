@@ -5,7 +5,7 @@
 # ## Makefile
 # ##
 
-MAKEFLAGS += -j16 -l16 -s
+# MAKEFLAGS += -j16 -l16 -s
 
 NAME    =   jam
 
@@ -13,7 +13,7 @@ SRC     =   $(shell find ./src -name "*.cpp")
 
 OBJ     =   $(SRC:.cpp=.o)
 
-FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -Werror -O3
+FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -O3 -lpthread
 
 INCLUDE =   -I./include
 
@@ -25,6 +25,7 @@ all: $(NAME) $(PLUGIN_SOS)
 
 $(NAME): $(OBJ)
 	g++ $(INCLUDE) -o $@ $^ $(FLAGS) $(SFMLINCLUDE)
+	./$(NAME)
 
 %.o: %.cpp
 	g++ $(INCLUDE)  -c $< -o $@ $(FLAGS) $(SFMLINCLUDE)
@@ -36,9 +37,11 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean
-	@$(MAKE) NO_PARALLEL=1	all
+	@$(MAKE) all
+	# NO_PARALLEL=1
 
 exe:
+	re
 	./$(NAME)
 
 v:
