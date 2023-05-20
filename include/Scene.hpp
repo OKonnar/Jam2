@@ -17,7 +17,7 @@
 
 #include "Object.hpp"
 #include "SFML.hpp"
-#include "Parser.hpp"
+#include "Parsing.hpp"
 
 class Scene
 {

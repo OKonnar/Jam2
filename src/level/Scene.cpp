@@ -5,16 +5,15 @@
 ** Scene
 */
 
-#include "../include/Scene.hpp"
+#include "Scene.hpp"
 
 Scene::Scene() {}
 Scene::~Scene() {}
 
 void Scene::startLevel(std::string configFile)
 {
-    Parser parser;
+    Parsing parser;
     parser.parseFile(configFile);
-    
 }
 
 void Scene::loop(void)

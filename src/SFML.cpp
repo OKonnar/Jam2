@@ -93,20 +93,6 @@ void SFML::display(vector<sf::RectangleShape> rects, vector<sf::Sprite> sprites)
     _window.display();
 }
 
-void SFML::playSound(string filepath)
-{
-    sf::SoundBuffer buffer;
-    if (!buffer.loadFromFile(filepath)) {
-        throw runtime_error("wrong file path");
-    }
-    sf::Sound sound;
-    sound.setBuffer(buffer);
-    sound.play();
-    while (sound.getStatus() == sf::Sound::Playing) {
-        sf::sleep(sf::seconds(0.1f));
-    }
-}
-
 void SFML::playSoundFromFile(string filepath)
 {
     sf::SoundBuffer buffer;
