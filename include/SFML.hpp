@@ -39,6 +39,7 @@ class SFML
         sf::RenderWindow    _window;
         sf::Clock           _clock;
         std::map<std::string, std::shared_ptr<Sounds>> _sounds;
+        std::map<std::string, std::shared_ptr<sf::Music>> _musics;
 
     public:
         SFML(void);
@@ -54,11 +55,17 @@ class SFML
         void updateSprite(sf::RectangleShape);
         void updateSprite(sf::RectangleShape, sf::Vector2f newPos);
 
-        void display(std::vector<sf::RectangleShape> rects, std::vector<sf::Sprite> sprites);
+        void clear();
+        void display();
         void events();
 
+        //! SOUNDS
         void playSoundFromFile(string filepath);
         std::map<std::string, std::shared_ptr<Sounds>> getSounds() {return _sounds;};
         void playSound(string name);
         void loadSounds();
+
+        //! MUSICS
+        void loadMusic(const std::string& filename);
+        void playMusic(const std::string& name);
 };

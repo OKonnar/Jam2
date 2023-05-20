@@ -22,7 +22,6 @@ int main()
     std::vector<std::string> lines = parser.getLines();
 
     std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
-    sfml.loadSounds();
     sounds = sfml.getSounds();
 
     //! TESTS FOR AUDIO
@@ -32,12 +31,15 @@ int main()
     //     sfml.playSound(sound.first);
     // }
 
-    for (auto &line : lines) {
-        cout << line << endl;
-        if (line.find('1') != std::string::npos) {
-            sfml.playSound("fa");
-        } else sfml.playSound("si");
-    }
+    // for (auto &line : lines) {
+    //     cout << line << endl;
+    //     if (line.find('1') != std::string::npos) {
+    //         sfml.playSound("fa");
+    //     } else sfml.playSound("si");
+    // }
+
+    sfml.loadMusic("eterna-cancao-wav-12569.wav");
+    sfml.playMusic("eterna-cancao-wav-12569.wav");
 
     sfml.loop();
 
