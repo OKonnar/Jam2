@@ -96,6 +96,6 @@ void SFML::playSound(string name)
     }
     it->second->sound.play();
     while (it->second->sound.getStatus() == sf::Sound::Playing) {
-        sf::sleep(sf::seconds(0.1f));
+        sf::sleep(sf::seconds(0.05f));
     }
 }

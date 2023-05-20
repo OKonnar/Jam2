@@ -35,8 +35,8 @@ int main()
     for (auto &line : lines) {
         cout << line << endl;
         if (line.find('1') != std::string::npos) {
-            sfml.playSound("do");
-        }
+            sfml.playSound("fa");
+        } else sfml.playSound("si");
     }
 
     sfml.loop();
