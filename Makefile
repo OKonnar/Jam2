@@ -25,7 +25,6 @@ all: $(NAME) $(PLUGIN_SOS)
 
 $(NAME): $(OBJ)
 	g++ $(INCLUDE) -o $@ $^ $(FLAGS) $(SFMLINCLUDE)
-	./$(NAME)
 
 %.o: %.cpp
 	g++ $(INCLUDE)  -c $< -o $@ $(FLAGS) $(SFMLINCLUDE)
@@ -38,10 +37,9 @@ fclean: clean
 
 re: fclean
 	@$(MAKE) all
-	# NO_PARALLEL=1
 
 exe:
-	re
+	make re
 	./$(NAME)
 
 v:
