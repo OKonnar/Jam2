@@ -14,6 +14,7 @@ SFML::SFML(void)
     _windowSize.x = 1920;
     _windowSize.y = 1080;
     _window.create(sf::VideoMode(_windowSize.x, _windowSize.y, 32), "Jam");
+    loadSounds();
 }
 
 SFML::~SFML(void)
@@ -83,13 +84,13 @@ void SFML::updateSprite(sf::RectangleShape rect, sf::Vector2f newPos)
     _window.draw(rect);
 }
 
-void SFML::display(vector<sf::RectangleShape> rects, vector<sf::Sprite> sprites)
+void SFML::clear()
 {
     _window.clear(sf::Color::White);
-    for (vector<sf::RectangleShape>::iterator it = rects.begin(); it != rects.end(); it++)
-        updateSprite(*it);
-    for (vector<sf::Sprite>::iterator it = sprites.begin(); it != sprites.end(); it++)
-        updateSprite(*it);
+}
+
+void SFML::display()
+{
     _window.display();
 }
 
@@ -139,7 +140,6 @@ void SFML::loadSounds() {
             sound->sound.setBuffer(sound->buffer);
             string filename = entry->d_name;
             filename = filename.substr(0, filename.size()-4);
-            cout << filename << endl;
             _sounds[filename] = sound;
         }
     }
@@ -158,5 +158,26 @@ void SFML::playSound(string name)
     it->second->sound.play();
     while (it->second->sound.getStatus() == sf::Sound::Playing) {
         sf::sleep(sf::seconds(0.05f));
+    }
+}
+
+void SFML::loadMusic(const string& filename)
+{
+    const string path = "assets/musics/";
+    shared_ptr<sf::Music> music = make_shared<sf::Music>();
+    if (!music->openFromFile(path + filename)) {
+        throw runtime_error("Failed to load music file: " + filename);
+    }
+    _musics[filename] = music;
+}
+
+void SFML::playMusic(const std::string& name)
+{
+    auto it = _musics.find(name);
+    if (it != _musics.end()) {
+        it->second->play();
+    }
+    else {
+        throw std::runtime_error("Music not found: " + name);
     }
 }
