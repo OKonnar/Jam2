@@ -17,7 +17,7 @@ FLAGS   =   -lconfig++ -std=c++20 -Wall -Wextra -O3 -lpthread
 
 INCLUDE =   -I./include
 
-SFMLINCLUDE	=	-lsfml-graphics -lsfml-window -lsfml-system
+SFMLINCLUDE	= -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 
 CFLAGS = -g
 
@@ -39,8 +39,9 @@ re: fclean
 	@$(MAKE) all
 
 exe:
-	make re
-	./$(NAME)
+	@make re
+	@./$(NAME)
+	@make fclean
 
 v:
 	valgrind --track-origins=yes --leak-check=full -s ./$(NAME)
