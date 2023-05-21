@@ -172,8 +172,41 @@ void Scene::loop(void)
             updateDisplay();
         }
     }
+    endLevel();
 }
 
 int Scene::endLevel(void)
 {
+    sf::Text winner;
+    std::string win = "Player 1";
+    if (_scoreBlack > _scoreWhite)
+        win = "Player 2";
+    winner.setFont(font);
+    winner.setFillColor(sf::Color(sf::Color::White));
+    winner.setString("Winner: " + win);
+    winner.setPosition(sf::Vector2f(960, 300));
+
+    sf::Text p1;
+    p1.setFont(font);
+    p1.setFillColor(sf::Color(sf::Color::White));
+    p1.setString("Player 1");
+    p1.setPosition(sf::Vector2f(960, 400));
+    sw.setFillColor(sf::Color::White);
+    sw.setPosition(sf::Vector2f(960, 450));
+
+    sf::Text p2;
+    p2.setFont(font);
+    p2.setFillColor(sf::Color(sf::Color::White));
+    p2.setString("Player 2");
+    p2.setPosition(sf::Vector2f(960, 550));
+    sb.setPosition(sf::Vector2f(960, 600));
+
+    _sfml->clear();
+    _sfml->draw(sw);
+    _sfml->draw(sb);
+    _sfml->draw(p1);
+    _sfml->draw(p2);
+    _sfml->draw(winner);
+    _sfml->display();
+    sleep(5);
 }
