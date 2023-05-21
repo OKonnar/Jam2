@@ -164,6 +164,7 @@ void SFML::loadMusic(const string& filename)
     const string path = "assets/musics/";
     shared_ptr<sf::Music> music = make_shared<sf::Music>();
     if (!music->openFromFile(path + filename)) {
+        std::cout << path + filename << endl;
         throw runtime_error("Failed to load music file: " + filename);
     }
     string name = filename.substr(0, filename.size() - 4);

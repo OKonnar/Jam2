@@ -32,7 +32,6 @@ Scene::Scene(string configFile, shared_ptr<SFML> sfml)
     background.setTexture(backgroundTexture);
     background.setScale(sf::Vector2f(1.75, 1.75));
     _sfml->loadMusic(_parsing.getFileName());
-    //create all sprites of the background
 }
 
 Scene::~Scene() {}
@@ -95,52 +94,67 @@ std::optional<std::vector<sf::RectangleShape>::iterator> Scene::getCollision(sf:
     return nullopt;
 }
 
+int Scene::getScoreTile(sf::RectangleShape rect)
+{
+    int result = (980 - rect.getPosition().y + rect.getSize().y / 2);
+    std::cout << result << std::endl;
+    return 20 - result / 10;
+}
+
 void Scene::handleEvents()
 {
+    static array<bool, 6> keyStatus = {false, false, false, false, false, false};
     _sfml->events();
-    if (_sfml->isButtonPressed(sf::Keyboard::Q) && getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[0] && _sfml->isButtonPressed(sf::Keyboard::Q) && getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::White ? _scoreWhite += 10 : _scoreWhite -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::White ? _scoreWhite += getScoreTile(*it) : _scoreWhite -= 20;
+        _rectangles.erase(it);
     }
-    if (_sfml->isButtonPressed(sf::Keyboard::S) && getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[1] && _sfml->isButtonPressed(sf::Keyboard::S) && getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::White ? _scoreWhite += 10 : _scoreWhite -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::White ? _scoreWhite += getScoreTile(*it) : _scoreWhite -= 20;
+        _rectangles.erase(it);
     }
-    if (_sfml->isButtonPressed(sf::Keyboard::D) && getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[2] && _sfml->isButtonPressed(sf::Keyboard::D) && getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::White ? _scoreWhite += 10 : _scoreWhite -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::White ? _scoreWhite += getScoreTile(*it) : _scoreWhite -= 20;
+        _rectangles.erase(it);
     }
 
-    if (_sfml->isButtonPressed(sf::Keyboard::K) && getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[3] && _sfml->isButtonPressed(sf::Keyboard::K) && getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::Black ? _scoreBlack += 10 : _scoreBlack -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[0] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::Black ? _scoreBlack += getScoreTile(*it) : _scoreBlack -= 20;
+        _rectangles.erase(it);
     }
-    if (_sfml->isButtonPressed(sf::Keyboard::L) && getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[4] && _sfml->isButtonPressed(sf::Keyboard::L) && getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::Black ? _scoreBlack += 10 : _scoreBlack -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[1] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::Black ? _scoreBlack += getScoreTile(*it) : _scoreBlack -= 20;
+        _rectangles.erase(it);
     }
-    if (_sfml->isButtonPressed(sf::Keyboard::M) && getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)) != std::nullopt)
+    if (!keyStatus[5] && _sfml->isButtonPressed(sf::Keyboard::M) && getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980 )) != std::nullopt)
     {
-        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)));
-        _rectangles.erase(*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980)));
-        it->getFillColor() == sf::Color::Black ? _scoreBlack += 10 : _scoreBlack -= 10;
+        std::vector<sf::RectangleShape>::iterator it = (*getCollision(sf::Vector2f(_lanesX[2] + TILESIZEX / 2, 980 )));
+        it->getFillColor() == sf::Color::Black ? _scoreBlack += getScoreTile(*it) : _scoreBlack -= 20;
+        _rectangles.erase(it);
     }
+
+    keyStatus[0] = _sfml->isButtonPressed(sf::Keyboard::Q) ? true : false;
+    keyStatus[1] = _sfml->isButtonPressed(sf::Keyboard::S) ? true : false;
+    keyStatus[2] = _sfml->isButtonPressed(sf::Keyboard::D) ? true : false;
+    keyStatus[3] = _sfml->isButtonPressed(sf::Keyboard::K) ? true : false;
+    keyStatus[4] = _sfml->isButtonPressed(sf::Keyboard::L) ? true : false;
+    keyStatus[5] = _sfml->isButtonPressed(sf::Keyboard::M) ? true : false;
 }
 
 void Scene::loop(void)
 {
     int test = 0;
-    //_sfml->playMusic(_parsing.getFileName());
+    _sfml->playMusic(_parsing.getFileName().substr(0, _parsing.getFileName().size() - 4));
     while (_sceneRunning && _sfml->windowIsOpen()) {
         if (_sfml->getClock().getElapsedTime().asSeconds() - _clock > 1 / 60 ) {
             _clock = _sfml->getClock().getElapsedTime().asSeconds();

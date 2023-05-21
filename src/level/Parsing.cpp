@@ -20,8 +20,7 @@ Parsing::~Parsing() {}
 void Parsing::parseFile(const std::string& fileConfig) {
     std::ifstream inputFile(fileConfig);
     if (!inputFile.is_open()) {
-        std::cout << "Failed to open file : " << fileConfig << std::endl;
-        return;
+        throw std::runtime_error("Failed to open config file: " + fileConfig);
     }
 
     std::string line;
@@ -48,13 +47,3 @@ std::vector<int> Parsing::getLine(unsigned int index)
     }
     return result;
 }
-
-/*int main()
-{
-    Parsing test;
-    test.parseFile("testfile");
-    std::cout << test.getFileName() << std::endl;
-    std::cout << test.getBPM() << std::endl;
-    std::cout << test.getLength() << std::endl;
-    std::cout << "Line 2:" << test.getLine(2)[0] << " " << test.getLine(2)[1] << " " << test.getLine(2)[2] << std::endl;
-}*/

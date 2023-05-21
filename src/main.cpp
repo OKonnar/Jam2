@@ -19,7 +19,7 @@ int main()
     std::shared_ptr<SFML> sfml = std::make_shared<SFML>();
     //std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
     //sounds = sfml->getSounds();
-    Scene scene("./songs/example.txt", sfml);
+    Scene scene("./songs/crazyfrog", sfml);
     scene.loop();
 
     //! TESTS FOR AUDIO

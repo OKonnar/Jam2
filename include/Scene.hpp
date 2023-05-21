@@ -49,6 +49,7 @@ class Scene
         Scene(string configFile, shared_ptr<SFML> sfml);
         ~Scene();
         bool isNewLine();
+        int getScoreTile(sf::RectangleShape rect);
         void updateFromFile();
         void updateDisplay();
         void loop();
