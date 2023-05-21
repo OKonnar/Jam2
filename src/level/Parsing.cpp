@@ -39,6 +39,7 @@ std::vector<int> Parsing::getLine(unsigned int index)
 {
     std::vector<int> result;
     if (index < _lines.size()) {
+        std::cout << _lines[index] << std::endl;
         std::istringstream iss(_lines[index]);
         int value;
         while (iss >> value) {

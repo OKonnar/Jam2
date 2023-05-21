@@ -41,7 +41,6 @@ re: fclean
 exe:
 	@make re
 	@./$(NAME)
-	@make fclean
 
 v:
 	valgrind --track-origins=yes --leak-check=full -s ./$(NAME)

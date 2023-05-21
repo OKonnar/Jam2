@@ -52,11 +52,15 @@ void Scene::updateFromFile()
     if (_linesCpt == _parsing.getLinesNbr() - 1)
         _sceneRunning = false;
     std::vector<int> tiles = _parsing.getLine(_linesCpt);
+    std::cout << _linesCpt << std::endl;
     for (std::size_t i = 0; i < tiles.size(); i++) {
-        if (tiles[i] == 0)
+        if (tiles[i] == 0) {
             _rectangles.push_back(_sfml->create(sf::Vector2f(TILESIZEX, TILESIZEY), sf::Vector2f(_lanesX[i], -TILESIZEY), sf::Color::Black));
-        if (tiles[i] == 1)
+            cout << "test" << endl;}
+        else if (tiles[i] == 1)
             _rectangles.push_back(_sfml->create(sf::Vector2f(TILESIZEX, TILESIZEY), sf::Vector2f(_lanesX[i], -TILESIZEY), sf::Color::White));
+        else
+            _rectangles.push_back(_sfml->create(sf::Vector2f(TILESIZEX, TILESIZEY), sf::Vector2f(_lanesX[i], -TILESIZEY), sf::Color(127, 127, 127, 255)));
     }
     _linesCpt++;
 
@@ -73,7 +77,7 @@ void Scene::updateDisplay()
     for (vector<sf::Sprite>::iterator it = _sprites.begin(); it != _sprites.end(); it++)
         _sfml->updateSprite(*it);
     for (vector<sf::RectangleShape>::iterator it = _rectangles.begin(); it != _rectangles.end(); it++) {
-        it->setPosition(sf::Vector2f(it->getPosition().x, it->getPosition().y + static_cast<float>(TILESIZEX * _parsing.getBPM()) / 10000));
+        it->setPosition(sf::Vector2f(it->getPosition().x, it->getPosition().y + static_cast<float>(TILESIZEY * _parsing.getBPM()) / 10000));
         _sfml->updateSprite(*it);
     }
     _sfml->updateSprite(_sfml->create(sf::Vector2f(1920, 5), sf::Vector2f(0, 980), sf::Color::Red));
