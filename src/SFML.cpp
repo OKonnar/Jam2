@@ -48,6 +48,11 @@ void SFML::draw(sf::Text text)
     _window.draw(text);
 }
 
+void SFML::draw(sf::RectangleShape rect)
+{
+    _window.draw(rect);
+}
+
 sf::Sprite SFML::create(string filename, sf::Vector2f size, sf::Vector2f position)
 {
     sf::Sprite sprite;

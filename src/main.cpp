@@ -11,6 +11,7 @@
 #include "SFML.hpp"
 #include "Parsing.hpp"
 #include "Scene.hpp"
+#include "Menu.hpp"
 
 using namespace std;
 
@@ -20,8 +21,10 @@ int main()
     //std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
     //sounds = sfml->getSounds();
     // Scene scene("./songs/crazyfrog", sfml);
-    Scene scene("./songs/Unravel _Tokyo_Ghoul_OP_Piano", sfml);
-    scene.loop();
+    // Scene scene("./songs/Unravel _Tokyo_Ghoul_OP_Piano", sfml);
+    // scene.loop();
+    Menu menu(sfml);
+    menu.loop();
 
     //! TESTS FOR AUDIO
 

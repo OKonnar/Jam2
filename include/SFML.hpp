@@ -61,6 +61,7 @@ class SFML
         bool isButtonPressed(sf::Keyboard::Key c);
         void draw(sf::Sprite sprite);
         void draw(sf::Text text);
+        void draw(sf::RectangleShape rect);
 
         //! SOUNDS
         void playSoundFromFile(string filepath);
