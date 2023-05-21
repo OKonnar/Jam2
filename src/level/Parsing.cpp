@@ -20,7 +20,7 @@ Parsing::~Parsing() {}
 void Parsing::parseFile(const std::string& fileConfig) {
     std::ifstream inputFile(fileConfig);
     if (!inputFile.is_open()) {
-        std::cout << "Failed to open file." << std::endl;
+        std::cout << "Failed to open file : " << fileConfig << std::endl;
         return;
     }
 

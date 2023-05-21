@@ -1,40 +1,24 @@
-#ifndef D8FD8845_5CBB_4256_96AF_3918578291E0
-#define D8FD8845_5CBB_4256_96AF_3918578291E0
+/*
+** EPITECH PROJECT, 2022
+** Visual Studio Live Share (Workspace)
+** File description:
+** Menu.hpp
+*/
 
-#include <vector>
-#include <string>
-#include <cstring>
-#include <dirent.h>
-#include <memory>
-#include <random>
-#include <SFML/Graphics.hpp>
+#ifndef MENU_HPP_
+#define MENU_HPP_
 
-struct button
-{
-    std::string name;
-    std::unique_ptr<sf::Sprite> sprite;
-    std::unique_ptr<sf::Texture> texture;
-    bool hover;
-    bool pressed;
-};
+#include "Scene.hpp"
 
-struct sprite
-{
-    std::unique_ptr<sf::Sprite> sprite;
-    std::unique_ptr<sf::Texture> texture;
-};
-
-class menu
+class Menu
 {
     private:
-        std::vector<button> songsButton;
-        void moveAllButtons(sf::Vector2f delta);
-        sprite background1;
-        sprite background2;
+        shared_ptr<SFML> _sfml;
+        vector<sf::RectangleShape> _rectangles;
 
     public:
-        menu();
-        void update();
+        Menu(shared_ptr<SFML> sfml);
+        ~Menu() {};
 };
 
-#endif /* D8FD8845_5CBB_4256_96AF_3918578291E0 */
+#endif /* MENU_HPP_ */

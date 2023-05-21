@@ -14,6 +14,7 @@
 #include <ostream>
 #include <memory>
 #include <vector>
+#include <optional>
 
 #include "Object.hpp"
 #include "SFML.hpp"
@@ -30,20 +31,29 @@ class Scene
         shared_ptr<SFML> _sfml;
         vector<sf::Sprite> _sprites;
         vector<sf::RectangleShape> _rectangles;
+        sf::Sprite background;
+        sf::Texture backgroundTexture;
+        sf::Font font;
+        sf::Text sw;
+        sf::Text sb;
         Parsing _parsing;
         std::vector<double> _lanesX;
         string _levelMusic;
         unsigned int _linesCpt;
         bool _sceneRunning;
-        unsigned int _clock;
+        double _clock;
+        int _scoreWhite;
+        int _scoreBlack;
 
     public:
         Scene(string configFile, shared_ptr<SFML> sfml);
         ~Scene();
-        void startLevel(string configFile, shared_ptr<SFML> sfml);
+        bool isNewLine();
         void updateFromFile();
         void updateDisplay();
         void loop();
+        std::optional<std::vector<sf::RectangleShape>::iterator> getCollision(sf::Vector2f position);
+        void handleEvents();
         int endLevel();
 };
 

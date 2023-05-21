@@ -17,16 +17,9 @@ using namespace std;
 int main()
 {
     std::shared_ptr<SFML> sfml = std::make_shared<SFML>();
-    Parsing parser;
-
-    parser.parseFile("assets/exampleconfig");
-    std::vector<std::string> lines = parser.getLines();
-
-    std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
-    sounds = sfml->getSounds();
-
-    Scene scene;
-    scene.startLevel("assets/exampleconfig", sfml);
+    //std::map<std::string, std::shared_ptr<SFML::Sounds>> sounds;
+    //sounds = sfml->getSounds();
+    Scene scene("./songs/example.txt", sfml);
     scene.loop();
 
     //! TESTS FOR AUDIO

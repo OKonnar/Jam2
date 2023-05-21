@@ -14,28 +14,38 @@ SFML::SFML(void)
     _windowSize.x = 1920;
     _windowSize.y = 1080;
     _window.create(sf::VideoMode(_windowSize.x, _windowSize.y, 32), "Jam");
-    loadSounds();
+    //loadSounds();
 }
 
 SFML::~SFML(void)
 {}
 
-void SFML::loop(void)
+bool SFML::windowIsOpen()
 {
-    // create();
-    while (_window.isOpen()) {
-        events();
-        // update();
-        // display();
-    }
+    return (_window.isOpen());
 }
 
-void SFML::events(void)
+void SFML::events()
 {
     while (_window.pollEvent(_event)) {
         if (_event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             _window.close();
     }
+}
+
+bool SFML::isButtonPressed(sf::Keyboard::Key c)
+{
+    return sf::Keyboard::isKeyPressed(c);
+}
+
+void SFML::draw(sf::Sprite sprite)
+{
+    _window.draw(sprite);
+}
+
+void SFML::draw(sf::Text text)
+{
+    _window.draw(text);
 }
 
 sf::Sprite SFML::create(string filename, sf::Vector2f size, sf::Vector2f position)
@@ -86,7 +96,7 @@ void SFML::updateSprite(sf::RectangleShape rect, sf::Vector2f newPos)
 
 void SFML::clear()
 {
-    _window.clear(sf::Color(255, 255, 255, 127));
+    _window.clear(sf::Color(127, 127, 127, 255));
 }
 
 void SFML::display()
@@ -110,7 +120,7 @@ void SFML::playSoundFromFile(string filepath)
 
 void SFML::loadSounds()
 {
-    const char *path = "assets/sounds/";
+    const char *path = "./assets/sounds/";
     DIR *dir = opendir(path);
     if (dir == nullptr) {
         cerr << "Failed to open directory\n";
@@ -169,6 +179,11 @@ void SFML::playMusic(const std::string& name)
     else {
         throw std::runtime_error("Music not found: " + name);
     }
+}
+
+void SFML::startClock()
+{
+    _clock.restart();
 }
 
 sf::Clock SFML::getClock(void)

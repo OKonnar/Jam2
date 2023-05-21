@@ -45,7 +45,7 @@ class SFML
         SFML(void);
         ~SFML(void);
 
-        void loop();
+        bool windowIsOpen();
 
         sf::Sprite create(std::string filename, sf::Vector2f size, sf::Vector2f position);
         sf::RectangleShape create(sf::Vector2f size, sf::Vector2f position, sf::Color color);
@@ -58,6 +58,9 @@ class SFML
         void clear();
         void display();
         void events();
+        bool isButtonPressed(sf::Keyboard::Key c);
+        void draw(sf::Sprite sprite);
+        void draw(sf::Text text);
 
         //! SOUNDS
         void playSoundFromFile(string filepath);
@@ -70,5 +73,6 @@ class SFML
         void playMusic(const std::string& name);
 
         //! CLOCK
+        void startClock();
         sf::Clock getClock(void);
 };
