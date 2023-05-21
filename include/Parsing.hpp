@@ -21,6 +21,7 @@ class Parsing {
         int getLength() {return _length;};
         std::string getFileName() {return _fileName;};
         std::vector<int> getLine(unsigned int index);
+        int getLinesNbr() {return _lines.size();};
 
         std::vector<std::string> getLines() {return _lines;};
 

@@ -19,27 +19,30 @@
 #include "SFML.hpp"
 #include "Parsing.hpp"
 
-#define TILESIZEX 50
-#define TILESIZEY 100
+#define TILESIZEX 100
+#define TILESIZEY 150
 
 using namespace std;
 
 class Scene
 {
-    public:
-        vector<shared_ptr<Object>> _objects;
-        string _levelMusic;
-        unsigned int _bpm;
+    private:
         shared_ptr<SFML> _sfml;
         vector<sf::Sprite> _sprites;
         vector<sf::RectangleShape> _rectangles;
         Parsing _parsing;
         std::vector<double> _lanesX;
+        string _levelMusic;
+        unsigned int _linesCpt;
+        bool _sceneRunning;
+        unsigned int _clock;
 
     public:
+        Scene(string configFile, shared_ptr<SFML> sfml);
         ~Scene();
-        Scene();
         void startLevel(string configFile, shared_ptr<SFML> sfml);
+        void updateFromFile();
+        void updateDisplay();
         void loop();
         int endLevel();
 };
